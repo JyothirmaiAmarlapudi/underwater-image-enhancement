@@ -1,1 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Balancing And Fusion For Image Enhancement</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 2px;
+            background-color: #f4f4f4;
+        }
+        h1, h2, h3 {
+            text-align: center;
+        }
+        form {
+            max-width: 500px;
+            margin: 20px auto;
+            text-align: center;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background: #fff;
+        }
+        input[type="file"], select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+        }
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+        input[type="submit"]:hover {
+            background-color: #452049;
+        }
+        img {
+            display: block;
+            margin: 10px auto;
+            max-width: 100%;
+            height: auto;
+        }
+        #imageInput2 {
+            display: none;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <img src="https://rvrjcce.ac.in/files/images/header24052022.png" alt="College Image" style="max-width: 100%; height: auto;">
+
+    <h1>Color Balancing And Fusion For Image Enhancement</h1>
+
+    <form action="/" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
+        <label>Select the first image:</label>
+        <input type="file" name="image" id="imageInput1" accept=".jpg, .jpeg, .png" required>
+
+        <label for="options">Select an enhancement technique:</label>
+        <select name="option" id="options" onchange="showHideImageInput()">
+            <option value="Color Balance">Color Balance</option>
+            <option value="Fusion">Fusion</option>
+            <option value="CLAHE">CLAHE (Contrast Enhancement)</option>
+            <option value="Gamma Correction">Gamma Correction</option>
+            <option value="Denoising">Denoising</option>
+        </select>
+
+        <div id="imageInput2">
+            <label>Select the second image (for Fusion only):</label>
+            <input type="file" name="image2" id="imageInput2Field" accept=".jpg, .jpeg, .png">
+        </div>
+
+        <input type="submit" value="Enhance">
+    </form>
+
+    {% if result_image %}
+    <h2>Result</h2>
+    <img src="{{ input_image }}" alt="Input Image">
+
+    {% if input_image2 %}
+    <h3>Second Image (Fusion Mode)</h3>
+    <img src="{{ input_image2 }}" alt="Second Input Image">
+    {% endif %}
+
+    <h3>Enhanced Image</h3>
+    <img src="{{ result_image }}" alt="Result Image">
+    {% endif %}
+
+    <div class="footer">
+        <p>Visit <a href="https://rvrjcce.ac.in" target="_blank">RVR & JC College of Engineering</a> for more information.</p>
+    </div>
+
+    <script>
+        function showHideImageInput() {
+            var selectedOption = document.getElementById("options").value;
+            var imageInput2 = document.getElementById("imageInput2");
+            imageInput2.style.display = selectedOption === "Fusion" ? "block" : "none";
+        }
+
+        function validateForm() {
+            var selectedOption = document.getElementById("options").value;
+            var image1 = document.getElementById("imageInput1").files.length;
+            var image2 = document.getElementById("imageInput2Field").files.length;
+
+            if (image1 === 0) {
+                alert("Please upload an image before proceeding.");
+                return false;
+            }
+            if (selectedOption === "Fusion" && image2 === 0) {
+                alert("Please upload a second image for Fusion.");
+                return false;
+            }
+            return true;
+        }
+    </script>
+</body>
+</html>
 
