@@ -16,6 +16,10 @@ This web app allows users to enhance underwater images using:
 - Python + Flask
 - OpenCV
 - HTML + CSS (inside `templates/index.html`)
+  | Original                          | CLAHE | Gamma | Denoised |
+| --------------------------------- | ----- | ----- | -------- |
+| (Like a grid – helps save space.) |       |       |          |
+
 
 ## How to Run
 ```bash
